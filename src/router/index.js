@@ -10,8 +10,8 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    component: () => import('@/views/About.vue'),
+    path: '/PDFPrint',
+    component: () => import('@/views/PDFPrint.vue'),
   },
 ]
 

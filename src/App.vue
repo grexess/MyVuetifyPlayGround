@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <router-link to="/about">About</router-link>
+    <router-link to="/PDFPrint">PDFPrint</router-link>
+    <v-divider class="ma-8" />
     <router-view />
   </v-app>
 </template>
