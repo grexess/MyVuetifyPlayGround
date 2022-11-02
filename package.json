@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
     "vite": "^2.8.6",
     "vue": "^2.6.12",
     "vue-router": "^3.5.2",

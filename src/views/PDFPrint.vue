@@ -13,7 +13,7 @@
             <v-card>
               <v-card-title class="text-h5"> Drucke Resultate </v-card-title>
               <v-card-text>
-                <v-btn-toggle v-model="printFormat">
+                <v-btn-toggle v-model="printFormat" mandatory>
                   <v-btn>
                     <span class="">CSV</span>
                     <v-icon>mdi-file-delimited-outline</v-icon>
@@ -39,6 +39,9 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
 const PRINT_CSV = 0
 const PRINT_PDF = 1
 
@@ -61,27 +64,17 @@ export default {
 
   methods: {
     print() {
-      let data, type
       switch (this.printFormat) {
         case PRINT_CSV:
-          data = this.printCSV()
-          type = 'text/csv'
+          this.printCSV()
           break
         case PRINT_PDF:
-          data = this.printPDF()
-          type = 'application/pdf'
+          this.printPDF()
           break
         default:
-          data = this.printCSV()
+          this.printCSV()
           break
       }
-
-      const blob = new Blob([data], { type: type })
-      const url = window.URL.createObjectURL(blob)
-      var anchor = document.createElement('a')
-      anchor.href = url
-      anchor.setAttribute('download', 'Results.csv')
-      anchor.click()
     },
 
     printCSV() {
@@ -94,16 +87,24 @@ export default {
 
       for (let row of sampleArray) {
         for (const [index, col] of row.entries()) {
-          debugger
           csv += col + `${index < row.length - 1 ? ',' : ''}`
         }
         csv += '\r\n'
       }
-      return csv
+      const url = window.URL.createObjectURL(new Blob([csv], { type: 'text/csv' }))
+      const anchor = document.createElement('a')
+      anchor.href = url
+      anchor.setAttribute('download', 'Results.csv')
+      anchor.click()
     },
 
     printPDF() {
-      return ''
+      const doc = new jsPDF()
+      autoTable(doc, {
+        head: [['Column1', 'Column2', 'Column3']],
+        body: sampleArray,
+      })
+      doc.save('Results.pdf')
     },
   },
 }
