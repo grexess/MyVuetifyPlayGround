@@ -12,6 +12,7 @@
     "jspdf-autotable": "^3.5.25",
     "vite": "^2.8.6",
     "vue": "^2.6.12",
+    "vue-cropperjs": "^5.0.0",
     "vue-router": "^3.5.2",
     "vuetify": "^2.5.8"
   },
