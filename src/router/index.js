@@ -13,6 +13,10 @@ const routes = [
     path: '/PDFPrint',
     component: () => import('@/views/PDFPrint.vue'),
   },
+  {
+    path: '/ImageCropper',
+    component: () => import('@/views/ImageCropper.vue'),
+  },
 ]
 
 const router = new VueRouter({
