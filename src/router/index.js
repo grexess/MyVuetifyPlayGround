@@ -17,6 +17,10 @@ const routes = [
     path: '/ImageWrapper',
     component: () => import('@/views/ImageWrapper.vue'),
   },
+  {
+    path: '/SimpleUpload',
+    component: () => import('@/views/SimpleImageUpload.vue'),
+  },
 ]
 
 const router = new VueRouter({

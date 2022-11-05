@@ -1,7 +1,13 @@
 <template>
   <div>
     <div class="img-container">
-      <img ref="image" :src="src" crossorigin />
+      <!-- <v-img
+        ref="image"
+        max-height="150"
+        max-width="250"
+        :src="src"
+      ></v-img> -->
+      <img ref="image" :src="src" crossorigin class="img-container" />
     </div>
     <img :src="destination" class="img-preview" />
   </div>
@@ -24,8 +30,9 @@ export default {
   mounted() {
     this.image = this.$refs.image
     this.cropper = new Cropper(this.image, {
-      zoomable: false,
-      scalable: false,
+      // zoomable: false,
+      // scalable: false,
+      // preview: false,
       aspectRatio: 1,
       crop: () => {
         const canvas = this.cropper.getCroppedCanvas()
@@ -38,14 +45,11 @@ export default {
 
 <style scoped>
 .img-container {
-  width: 640px;
-  height: 480px;
-  float: left;
+  max-height: 200px;
 }
 .img-preview {
   width: 200px;
-  height: 200px;
-  float: left;
+  max-height: 200px;
   margin-left: 10px;
 }
 </style>

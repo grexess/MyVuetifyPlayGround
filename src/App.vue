@@ -2,6 +2,7 @@
   <v-app>
     <router-link to="/PDFPrint">PDFPrint</router-link>
     <router-link to="/ImageWrapper">ImageWrapper</router-link>
+    <router-link to="/SimpleUpload">SimpleUpload</router-link>
     <v-divider class="ma-8" />
     <router-view />
   </v-app>
