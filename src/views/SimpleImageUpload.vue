@@ -1,11 +1,38 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center" align="center">
-      <v-col cols="8">
-        <v-file-input show-size label="Select Image" accept="image/*" @change="selectImage" outlined></v-file-input>
+    <v-row no-gutters justify="start" align="center">
+      <v-col cols="4">
+        <v-file-input
+          show-size
+          label="Select Logo (200px * 200px)"
+          accept="image/*"
+          @change="selectImage"
+          outlined
+          hint="bla"
+          append-outer-icon="mdi-cloud-upload"
+        ></v-file-input>
       </v-col>
 
-      <v-col cols="4" class="pl-2">
+      <v-col cols="2" class="" align-self="center">
+        <v-btn color="success" dark small @click="upload">
+          Upload
+          <v-icon right dark>mdi-cloud-upload</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row no-gutters justify="start" align="center">
+      <v-col cols="4">
+        <v-file-input
+          show-size
+          label="Select Hero Image (640px * 480px)"
+          accept="image/*"
+          @change="selectImage"
+          outlined
+          append-outer-icon="mdi-cloud-upload"
+        ></v-file-input>
+      </v-col>
+
+      <v-col cols="2" class="pl-2" align-self="center">
         <v-btn color="success" dark small @click="upload">
           Upload
           <v-icon right dark>mdi-cloud-upload</v-icon>
@@ -21,10 +48,10 @@
       </div>
     </div>
 
+    <v-alert type="success">Logo hat Größe {{ imageSize }}</v-alert>
+
     <div v-if="previewImage">
-      <div>
-        <img class="preview my-3" :src="previewImage" alt="" />
-      </div>
+      <div><img class="preview my-3" :src="previewImage" alt="" /></div>
     </div>
 
     <v-alert v-if="message" border="left" color="blue-grey" dark>
@@ -48,13 +75,35 @@
 export default {
   name: 'upload-image',
   data() {
-    return { currentImage: undefined, previewImage: undefined, progress: 0, message: '', imageInfos: [] }
+    return {
+      currentImage: undefined,
+      previewImage: undefined,
+      progress: 0,
+      message: '',
+      imageInfos: [],
+      imageSize: { height: 0, width: 0 },
+    }
   },
 
   methods: {
     selectImage(image) {
       this.currentImage = image
       this.previewImage = URL.createObjectURL(this.currentImage)
+
+      //get image size
+      let reader = new FileReader()
+      debugger
+      reader.readAsDataURL(image)
+      reader.onload = evt => {
+        let img = new Image()
+        img.onload = () => {
+          debugger
+          this.imageSize.width = img.naturalWidth
+          this.imageSize.height = img.naturalHeight
+        }
+        img.src = evt.target.result
+      }
+
       this.progress = 0
       this.message = ''
     },
