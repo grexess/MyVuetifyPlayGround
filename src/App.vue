@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <router-link to="/PDFPrint">PDFPrint</router-link>
-    <router-link to="/ImageCropper">ImageCropper</router-link>
+    <router-link to="/ImageWrapper">ImageWrapper</router-link>
     <v-divider class="ma-8" />
     <router-view />
   </v-app>

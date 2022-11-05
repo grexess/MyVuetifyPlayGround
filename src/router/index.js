@@ -14,8 +14,8 @@ const routes = [
     component: () => import('@/views/PDFPrint.vue'),
   },
   {
-    path: '/ImageCropper',
-    component: () => import('@/views/ImageCropper.vue'),
+    path: '/ImageWrapper',
+    component: () => import('@/views/ImageWrapper.vue'),
   },
 ]
 
