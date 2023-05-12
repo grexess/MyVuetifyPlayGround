@@ -9,7 +9,7 @@
       </v-container>
     </v-main>
 
-    <!-- <ApplicationFooter /> -->
+    <ApplicationFooter />
   </v-app>
 </template>
 

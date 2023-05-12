@@ -12,23 +12,23 @@
     <template v-slot:img="{ props }">
       <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></v-img>
     </template>
-
     <v-app-bar-nav-icon @click.stop="store.toggleNavDrawer()"></v-app-bar-nav-icon>
-
-    <v-app-bar-title>Title</v-app-bar-title>
-
     <v-spacer></v-spacer>
-    {{ store.drawer }}
     <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
 
     <template v-slot:extension>
-      <v-tabs align-with-title>
-        <v-tab>Tab 1</v-tab>
-        <v-tab>Tab 2</v-tab>
-        <v-tab>Tab 3</v-tab>
-      </v-tabs>
+      <v-row class="ma-4">
+        <v-col v-for="n in 8" :key="n" cols="sm">
+          <v-card class="pa-2" outlined tile> col </v-card>
+        </v-col>
+      </v-row>
+      <!-- <v-tabs align-with-title icons-and-text>
+        <v-tab v-for="item in tabItems" :key="item.title" :href="item.link"
+          >{{ item.title }} <v-icon>{{ item.icon }}</v-icon></v-tab
+        >
+      </v-tabs> -->
     </template>
   </v-app-bar>
 </template>
@@ -39,6 +39,11 @@ import { store } from '@/store.js'
 export default {
   data: () => ({
     store: store,
+    tabItems: [
+      { title: 'Popup-Creator', icon: 'mdi-phone' },
+      { title: 'Kontakt', icon: 'mdi-phone' },
+      { title: 'Forum', icon: 'mdi-phone' },
+    ],
   }),
 }
 </script>
