@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" absolute bottom temporary>
+  <v-navigation-drawer v-model="store.nawDrawer" app bottom temporary>
     <v-list nav dense>
       <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
         <v-list-item>
@@ -23,16 +23,18 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
+
 export default {
   data: () => ({
-    drawer: false,
+    store: store,
     group: null,
   }),
 
-  watch: {
-    group() {
-      this.drawer = false
-    },
+  computed: {
+    // drawer() {
+    //   return this.store.drawer
+    // },
   },
 }
 </script>
