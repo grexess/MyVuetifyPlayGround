@@ -2,20 +2,8 @@
   <v-navigation-drawer v-model="store.nawDrawer" app bottom temporary>
     <v-list nav dense>
       <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-        <v-list-item>
-          <v-list-item-title>Foo</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Bar</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Fizz</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-title>Buzz</v-list-item-title>
+        <v-list-item v-for="item in navItems" :key="item.title" :to="item.title">
+          {{ item.title }}
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -29,6 +17,7 @@ export default {
   data: () => ({
     store: store,
     group: null,
+    navItems: [{ title: 'Blog' }, { title: 'Kontakt' }, { title: 'Forum' }],
   }),
 
   computed: {
