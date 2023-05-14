@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar
+  <!-- <v-app-bar
     app
     color="#6A76AB"
     dark
@@ -19,16 +19,51 @@
     </v-btn>
 
     <template v-slot:extension>
-      <v-row class="ma-4">
-        <v-col v-for="n in 8" :key="n" cols="sm">
-          <v-card class="pa-2" outlined tile> col </v-card>
+      <v-row class="" no-gutters>
+        <v-col v-for="item in tabItems" :key="item.title" cols="sm">
+          <div style="font-size: 0.5em">{{ item.title }}</div>
         </v-col>
       </v-row>
-      <!-- <v-tabs align-with-title icons-and-text>
-        <v-tab v-for="item in tabItems" :key="item.title" :href="item.link"
-          >{{ item.title }} <v-icon>{{ item.icon }}</v-icon></v-tab
-        >
-      </v-tabs> -->
+    </template>
+  </v-app-bar> -->
+  <v-app-bar app color="primary" dark prominent shrink-on-scroll>
+    <v-app-bar-nav-icon @click.stop="store.toggleNavDrawer()" class="d-flex d-sm-none"></v-app-bar-nav-icon>
+    <!-- <v-toolbar-title>Coding Beauty</v-toolbar-title> -->
+    <v-spacer></v-spacer>
+
+    <template v-slot:extension v-if="!$vuetify.breakpoint.xs">
+      <v-tabs align-with-title>
+        <v-tab>Start</v-tab>
+        <v-menu bottom left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text class="align-self-center mr-4" v-bind="attrs" v-on="on">
+              Unsere Apps
+              <v-icon right> mdi-menu-down </v-icon>
+            </v-btn>
+          </template>
+
+          <v-list class="grey lighten-3">
+            <v-list-item v-for="item in apps" :key="item" @click="addItem(item)">
+              {{ item }}
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text class="align-self-center mr-4" v-bind="attrs" v-on="on">
+              Events
+              <v-icon right> mdi-menu-down </v-icon>
+            </v-btn>
+          </template>
+
+          <v-list class="grey lighten-3">
+            <v-list-item v-for="item in events" :key="item" @click="addItem(item)">
+              {{ item }}
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-tab v-for="item in tabItems" :key="item.title">{{ item.title }}</v-tab>
+      </v-tabs>
     </template>
   </v-app-bar>
 </template>
@@ -40,10 +75,38 @@ export default {
   data: () => ({
     store: store,
     tabItems: [
-      { title: 'Popup-Creator', icon: 'mdi-phone' },
-      { title: 'Kontakt', icon: 'mdi-phone' },
+      { title: 'Blog', icon: 'mdi-phone' },
+      { title: 'Contact', icon: 'mdi-phone' },
       { title: 'Forum', icon: 'mdi-phone' },
     ],
+    apps: ['News', 'Maps', 'Books', 'Flights', 'Apps'],
+    events: ['Anstehend', 'Laufend', 'Bendet'],
+    pics: [],
+    picIndex: 0,
   }),
+  async created() {
+    this.startInterval()
+    const picNames = ['sport1-unsplash.webp', 'sport2-unsplash.webp', 'sport3-unsplash.webp']
+    // for (const name of picNames) {
+    //   console.log(`${this.$imagehost}portal/${name}`)
+    //   const blob = await URL.createObjectURL(fetch(`${this.$imagehost}portal/${name}`).then(res => res.blob()))
+    //   debugger
+    //   this.pics.push(blob)
+    // }
+  },
+
+  computed: {
+    getPic() {
+      return this.pics[this.picIndex]
+    },
+  },
+
+  methods: {
+    startInterval() {
+      setInterval(() => {
+        this.picIndex = (this.picIndex + 1) % 3
+      }, 5000)
+    },
+  },
 }
 </script>

@@ -1,10 +1,16 @@
 <template>
-  <v-app>
+  <v-app
+    :style="`
+      background-image: url('${$imagehost}logo/background-black.png');
+      background-color: #0d0d0d;
+      background-size: contain;
+    `"
+  >
     <NavigationDrawer />
     <ApplicationHeader />
 
-    <v-main id="mainArea">
-      <v-container fluid>
+    <v-main
+      ><v-container fluid>
         <router-view />
       </v-container>
     </v-main>
